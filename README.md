@@ -26,7 +26,7 @@ const ipAddress: string = await fetch({
     },
     handlers: [
         handlers.is({
-            headers: typia.createIs<{
+            headers: typia.createValidate<{
                 ":code": 200,
                 data: {
                     "content-type": "application/json"
