@@ -1,1 +1,1 @@
-export { is } from "./typia";
+export { is } from "./is";

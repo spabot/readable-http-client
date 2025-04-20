@@ -2,13 +2,14 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "readable-http-client",
   "description": "Declarative HTTP client for Bun.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "module": "src/index.ts",
   "types": "src/index.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "typia": "^9.1.1"
   },
   "peerDependencies": {
     "typescript": "^5"
