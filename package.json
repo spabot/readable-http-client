@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "readable-http-client",
+  "description": "Declarative HTTP client for Bun.",
+  "version": "0.0.2",
+  "module": "src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.5.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "keywords": [
+    "http client",
+    "declarative",
+    "declarative http client",
+    "bun"
+  ]
+}
