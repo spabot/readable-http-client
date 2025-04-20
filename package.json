@@ -2,8 +2,9 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "readable-http-client",
   "description": "Declarative HTTP client for Bun.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "module": "src/index.ts",
+  "types": "src/index.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
@@ -12,7 +13,15 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "repository": "https://github.com/spabot/readable-http-client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spabot/readable-http-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spabot/readable-http-client/issues"
+  },
+  "license": "MIT",
+  "contributors": [],
   "keywords": [
     "http client",
     "declarative",
