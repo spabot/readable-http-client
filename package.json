@@ -12,6 +12,7 @@
   "peerDependencies": {
     "typescript": "^5"
   },
+  "repository": "https://github.com/spabot/readable-http-client",
   "keywords": [
     "http client",
     "declarative",
