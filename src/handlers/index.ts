@@ -1,1 +1,1 @@
-export { is } from "./is";
+export { is, is2 } from "./is";
