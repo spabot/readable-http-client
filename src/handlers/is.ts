@@ -45,8 +45,8 @@ export function is<
 export function is2<T, Headers extends Partial<IResponse["headers"]>>(opts: {
   headers(input: IResponse["headers"]): IValidation<Headers>;
   handle(resp: IResponse & { headers: Headers }): T | null;
-}) {
-  return function (resp: IResponse) {
+}): IResponseHandler<T> {
+  return async function (resp: IResponse) {
     const headers = opts.headers(resp.headers);
     if (!headers.success) return null;
 
