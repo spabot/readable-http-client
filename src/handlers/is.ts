@@ -6,14 +6,20 @@ export interface IResponseHandlerIs<
   Headers extends Partial<IResponse["headers"]>,
   Body extends unknown,
 > {
-  headers: (input: IResponse["headers"]) => IValidation<Headers>;
-  body: (input: string) => Body | null;
+  headers(input: IResponse["headers"]): IValidation<Headers>;
+  body(input: string): Body | null;
   handle(resp: { headers: Headers; body: Body }): T | null;
 }
 
-export function is<T, Headers extends Partial<IResponse["headers"]>, Body>(
-  opts: IResponseHandlerIs<T, Headers, Body>,
-): IResponseHandler<T> {
+export function is<
+  T,
+  Headers extends Partial<IResponse["headers"]>,
+  Body,
+>(opts: {
+  headers(input: IResponse["headers"]): IValidation<Headers>;
+  body(input: string): Body | null;
+  handle(resp: IResponse & { headers: Headers; body: Body }): T | null;
+}): IResponseHandler<T> {
   return async function (resp: IResponse) {
     const headers = opts.headers(resp.headers);
     if (!headers.success) return null;
@@ -21,6 +27,39 @@ export function is<T, Headers extends Partial<IResponse["headers"]>, Body>(
     const body = opts.body(await resp.downloadBody());
     if (body === null) return null;
 
-    return opts.handle({ headers: headers.data, body });
+    return opts.handle({
+      downloadBody: resp.downloadBody,
+      headers: {
+        ...resp.headers,
+        ...headers.data,
+        data: {
+          ...resp.headers.data,
+          ...headers.data.data,
+        },
+      },
+      body,
+    });
+  };
+}
+
+export function is2<T, Headers extends Partial<IResponse["headers"]>>(opts: {
+  headers(input: IResponse["headers"]): IValidation<Headers>;
+  handle(resp: IResponse & { headers: Headers }): T | null;
+}) {
+  return function (resp: IResponse) {
+    const headers = opts.headers(resp.headers);
+    if (!headers.success) return null;
+
+    return opts.handle({
+      downloadBody: resp.downloadBody,
+      headers: {
+        ...resp.headers,
+        ...headers.data,
+        data: {
+          ...resp.headers.data,
+          ...headers.data.data,
+        },
+      },
+    });
   };
 }
