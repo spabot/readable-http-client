@@ -1,6 +1,7 @@
 import { jest, expect, test } from "bun:test";
 import { is } from "./is";
 import type { IResponse } from "..";
+import type { IValidation } from "typia";
 
 const resp: IResponse = {
   headers: {
@@ -29,7 +30,7 @@ test("call order", async () => {
   const headers = jest.fn(() => {
     expect(body).not.toBeCalled();
     expect(handle).not.toBeCalled();
-    return {};
+    return { success: true, data: {} } satisfies IValidation.ISuccess<{}>;
   });
   const body = jest.fn(() => {
     expect(headers).toBeCalled();
